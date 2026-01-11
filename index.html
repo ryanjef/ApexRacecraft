@@ -1,0 +1,627 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="Apex Racecraft helps club racers think like race engineers — so they stop guessing and start learning." />
+  <title>Apex Racecraft — Engineering-guided setup decisions for club racers</title>
+
+  <style>
+    :root{
+      --bg: #0b0f14;
+      --surface: #101824;
+      --surface2: #0f1620;
+      --text: #e7edf6;
+      --muted: #a9b6c7;
+      --border: rgba(231,237,246,0.12);
+      --shadow: 0 16px 50px rgba(0,0,0,0.45);
+      --radius: 16px;
+      --radius2: 22px;
+      --max: 1100px;
+      --accent: #5aa9ff; /* single accent, not neon */
+      --accent2: rgba(90,169,255,0.18);
+      --good: #7ee787;
+      --bad: #ff7b72;
+      --mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+      --sans: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial, "Apple Color Emoji", "Segoe UI Emoji";
+    }
+
+    * { box-sizing: border-box; }
+    html, body { height: 100%; }
+    body {
+      margin: 0;
+      font-family: var(--sans);
+      background: radial-gradient(1200px 800px at 65% -10%, rgba(90,169,255,0.18), transparent 60%),
+                  radial-gradient(900px 600px at 10% 10%, rgba(90,169,255,0.12), transparent 55%),
+                  var(--bg);
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    a { color: inherit; text-decoration: none; }
+    .wrap { max-width: var(--max); margin: 0 auto; padding: 28px 18px 64px; }
+
+    /* Top bar */
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 14px 16px;
+      border: 1px solid var(--border);
+      border-radius: 999px;
+      background: rgba(16,24,36,0.55);
+      backdrop-filter: blur(10px);
+    }
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 650;
+      letter-spacing: 0.2px;
+    }
+    .mark {
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, rgba(90,169,255,0.95), rgba(90,169,255,0.25));
+      box-shadow: 0 10px 30px rgba(90,169,255,0.22);
+      border: 1px solid rgba(231,237,246,0.12);
+      position: relative;
+      overflow: hidden;
+    }
+    .mark:before{
+      content:"";
+      position:absolute;
+      inset:-40%;
+      background: conic-gradient(from 180deg, rgba(231,237,246,0.35), transparent 60%);
+      transform: rotate(25deg);
+      opacity: 0.35;
+    }
+    .nav {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .nav a { padding: 8px 10px; border-radius: 999px; }
+    .nav a:hover { background: rgba(231,237,246,0.06); color: var(--text); }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      border: 1px solid var(--border);
+      background: rgba(231,237,246,0.06);
+      color: var(--text);
+      padding: 10px 14px;
+      border-radius: 999px;
+      font-weight: 600;
+      font-size: 14px;
+      cursor: pointer;
+      transition: transform 0.08s ease, background 0.2s ease, border-color 0.2s ease;
+      user-select: none;
+      white-space: nowrap;
+    }
+    .btn:hover { background: rgba(231,237,246,0.09); }
+    .btn:active { transform: translateY(1px); }
+    .btn.primary{
+      background: linear-gradient(135deg, rgba(90,169,255,0.95), rgba(90,169,255,0.50));
+      border-color: rgba(90,169,255,0.45);
+      box-shadow: 0 18px 40px rgba(90,169,255,0.12);
+    }
+    .btn.primary:hover{ filter: brightness(1.03); }
+    .btn .dot {
+      width: 8px; height: 8px; border-radius: 50%;
+      background: rgba(231,237,246,0.9);
+      box-shadow: 0 0 0 4px rgba(231,237,246,0.12);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 46px 0 20px;
+      display: grid;
+      grid-template-columns: 1.15fr 0.85fr;
+      gap: 26px;
+      align-items: start;
+    }
+    .kicker{
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      border: 1px solid var(--border);
+      background: rgba(16,24,36,0.6);
+      color: var(--muted);
+      font-size: 13px;
+      max-width: max-content;
+    }
+    .kicker code{
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 2px 8px;
+      border-radius: 999px;
+      background: rgba(90,169,255,0.10);
+      border: 1px solid rgba(90,169,255,0.25);
+      color: var(--text);
+    }
+    h1{
+      margin: 14px 0 10px;
+      font-size: clamp(34px, 4.2vw, 52px);
+      line-height: 1.05;
+      letter-spacing: -0.8px;
+    }
+    .subhead{
+      margin: 0 0 18px;
+      color: var(--muted);
+      font-size: 18px;
+      max-width: 60ch;
+    }
+    .ctaRow{
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      align-items: center;
+      margin: 18px 0 10px;
+    }
+    .micro{
+      margin: 10px 0 0;
+      color: rgba(169,182,199,0.85);
+      font-size: 13px;
+    }
+
+    /* Right hero card */
+    .card{
+      border: 1px solid var(--border);
+      background: linear-gradient(180deg, rgba(16,24,36,0.70), rgba(16,24,36,0.35));
+      border-radius: var(--radius2);
+      box-shadow: var(--shadow);
+      padding: 18px;
+    }
+    .card h3{
+      margin: 0 0 10px;
+      font-size: 14px;
+      color: var(--muted);
+      letter-spacing: 0.18px;
+      text-transform: uppercase;
+    }
+    .list{
+      margin: 0;
+      padding: 0;
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+    .pill{
+      display: grid;
+      grid-template-columns: 16px 1fr;
+      gap: 10px;
+      align-items: start;
+      padding: 10px 12px;
+      border-radius: 14px;
+      background: rgba(231,237,246,0.05);
+      border: 1px solid rgba(231,237,246,0.08);
+    }
+    .icon{
+      width: 16px; height: 16px;
+      border-radius: 6px;
+      background: rgba(90,169,255,0.30);
+      border: 1px solid rgba(90,169,255,0.30);
+      margin-top: 2px;
+      position: relative;
+    }
+    .icon:after{
+      content:"";
+      position:absolute;
+      inset: 3px;
+      border-radius: 4px;
+      background: rgba(231,237,246,0.55);
+      opacity: 0.35;
+    }
+    .pill b{ font-weight: 650; }
+    .pill span{ color: var(--muted); font-size: 13px; display:block; margin-top: 2px; }
+
+    /* Sections */
+    section{
+      margin-top: 28px;
+      padding-top: 10px;
+    }
+    .sectionTitle{
+      display:flex;
+      align-items: baseline;
+      justify-content: space-between;
+      gap: 14px;
+      margin: 0 0 12px;
+    }
+    .sectionTitle h2{
+      margin:0;
+      font-size: 22px;
+      letter-spacing: -0.2px;
+    }
+    .sectionTitle p{
+      margin:0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+
+    .grid2{
+      display:grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+    .grid3{
+      display:grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 16px;
+    }
+
+    .panel{
+      border: 1px solid var(--border);
+      background: rgba(16,24,36,0.45);
+      border-radius: var(--radius2);
+      padding: 16px;
+    }
+    .panel h3{
+      margin: 0 0 8px;
+      font-size: 16px;
+      letter-spacing: -0.2px;
+    }
+    .panel p{
+      margin: 0;
+      color: var(--muted);
+      font-size: 14px;
+    }
+    .panel ul{
+      margin: 10px 0 0;
+      color: var(--muted);
+      padding-left: 18px;
+    }
+    .panel li{ margin: 6px 0; }
+
+    .callout{
+      border: 1px solid rgba(90,169,255,0.25);
+      background: rgba(90,169,255,0.08);
+      border-radius: var(--radius2);
+      padding: 16px;
+      display:flex;
+      gap: 12px;
+      align-items:flex-start;
+    }
+    .callout .badge{
+      font-family: var(--mono);
+      font-size: 12px;
+      padding: 6px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(90,169,255,0.30);
+      background: rgba(90,169,255,0.10);
+      color: var(--text);
+      white-space: nowrap;
+    }
+    .callout p{ margin: 0; color: var(--muted); }
+
+    /* Quotes */
+    .quote{
+      position: relative;
+      padding: 16px;
+      border-radius: var(--radius2);
+      border: 1px solid rgba(231,237,246,0.10);
+      background: rgba(16,24,36,0.50);
+    }
+    .quote p{
+      margin: 0 0 10px;
+      color: var(--text);
+      font-size: 15px;
+    }
+    .quote small{
+      color: var(--muted);
+    }
+
+    /* Form */
+    form{
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 10px;
+      margin-top: 12px;
+    }
+    input[type="email"]{
+      width: 100%;
+      padding: 12px 14px;
+      border-radius: 14px;
+      border: 1px solid rgba(231,237,246,0.14);
+      background: rgba(15,22,32,0.6);
+      color: var(--text);
+      outline: none;
+    }
+    input::placeholder{ color: rgba(169,182,199,0.65); }
+    input:focus{
+      border-color: rgba(90,169,255,0.40);
+      box-shadow: 0 0 0 4px rgba(90,169,255,0.10);
+    }
+    .fineprint{
+      margin-top: 10px;
+      color: rgba(169,182,199,0.75);
+      font-size: 12px;
+    }
+
+    /* Footer */
+    footer{
+      margin-top: 44px;
+      padding-top: 18px;
+      border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 13px;
+      display:flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .footerLinks{
+      display:flex;
+      gap: 12px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+    .footerLinks a{
+      color: var(--muted);
+      padding: 6px 10px;
+      border-radius: 999px;
+    }
+    .footerLinks a:hover{ color: var(--text); background: rgba(231,237,246,0.06); }
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .hero{ grid-template-columns: 1fr; }
+      .grid2{ grid-template-columns: 1fr; }
+      .grid3{ grid-template-columns: 1fr; }
+      form{ grid-template-columns: 1fr; }
+      .nav{ display:none; }
+    }
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="topbar">
+      <div class="brand">
+        <div class="mark" aria-hidden="true"></div>
+        <span>Apex Racecraft</span>
+      </div>
+      <nav class="nav" aria-label="Primary navigation">
+        <a href="#how">How it works</a>
+        <a href="#who">Who it’s for</a>
+        <a href="#beta">Early access</a>
+      </nav>
+      <a class="btn primary" href="#beta"><span class="dot" aria-hidden="true"></span>Join Early Access</a>
+    </header>
+
+    <main>
+      <section class="hero" id="top">
+        <div>
+          <div class="kicker">
+            <code>Decision support</code>
+            <span>Engineering-guided setup decisions for club racers</span>
+          </div>
+
+          <h1>Think like a race engineer.</h1>
+          <p class="subhead">
+            Apex Racecraft helps club racers stop guessing and start learning with structured
+            session debriefs, disciplined change tracking, and outcomes you can trust.
+          </p>
+
+          <div class="ctaRow">
+            <a class="btn primary" href="#beta"><span class="dot" aria-hidden="true"></span>Join the Early Access List</a>
+            <a class="btn" href="#how">See how it works</a>
+          </div>
+
+          <p class="micro">
+            No telemetry required. Fast to use between sessions. Built for clarity under pressure.
+          </p>
+        </div>
+
+        <aside class="card" aria-label="Summary card">
+          <h3>What this fixes</h3>
+          <ul class="list">
+            <li class="pill">
+              <div class="icon" aria-hidden="true"></div>
+              <div><b>Vague “feel” notes</b><span>Turns impressions into structured symptoms.</span></div>
+            </li>
+            <li class="pill">
+              <div class="icon" aria-hidden="true"></div>
+              <div><b>Too many changes at once</b><span>Enforces intent and change discipline.</span></div>
+            </li>
+            <li class="pill">
+              <div class="icon" aria-hidden="true"></div>
+              <div><b>Forgetting what worked</b><span>Captures context so learning compounds.</span></div>
+            </li>
+            <li class="pill">
+              <div class="icon" aria-hidden="true"></div>
+              <div><b>Repeating the same mistakes</b><span>Creates a race-engineering memory for your car.</span></div>
+            </li>
+          </ul>
+        </aside>
+      </section>
+
+      <section id="how">
+        <div class="sectionTitle">
+          <h2>Stop chasing ghosts. Start closing loops.</h2>
+          <p>Professional engineering logic, simplified for club racing.</p>
+        </div>
+
+        <div class="grid2">
+          <div class="panel">
+            <h3>1) Capture context</h3>
+            <p>
+              Engineers don’t interpret “feel” without conditions. Track temp, grip, and session type
+              anchor your notes so they’re comparable later.
+            </p>
+            <ul>
+              <li>Conditions vs baseline</li>
+              <li>Grip trend vs last session</li>
+              <li>Session type (practice/qual/race)</li>
+            </ul>
+          </div>
+
+          <div class="panel">
+            <h3>2) Localize the symptom</h3>
+            <p>
+              Entry vs mid vs exit. Low vs medium vs high speed. Braking vs throttle.
+              You’ll diagnose with the same structure a pro engineer uses.
+            </p>
+            <ul>
+              <li>Where the issue shows up</li>
+              <li>Speed range and driver input</li>
+              <li>Trend over the run</li>
+            </ul>
+          </div>
+
+          <div class="panel">
+            <h3>3) Make one intentional change</h3>
+            <p>
+              Numbers come later. First, define the category and intent. You’ll stop changing three
+              things and hoping.
+            </p>
+            <ul>
+              <li>Change category (front/rear grip, roll stiffness, platform)</li>
+              <li>Intent (expected direction)</li>
+              <li>One change per session (by default)</li>
+            </ul>
+          </div>
+
+          <div class="panel">
+            <h3>4) Record the outcome</h3>
+            <p>
+              The point isn’t the change — it’s what you learned. Apex Racecraft closes the loop and
+              turns weekends into compounding knowledge.
+            </p>
+            <ul>
+              <li>Did it move in the intended direction?</li>
+              <li>What to remember next time</li>
+              <li>Locked notes you can trust</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="callout" style="margin-top:16px;">
+          <div class="badge">Not telemetry.</div>
+          <p>
+            Apex Racecraft is designed for the real world: limited time, limited data, and high stakes.
+            It helps you make better decisions with the information you already have.
+          </p>
+        </div>
+      </section>
+
+      <section id="who">
+        <div class="sectionTitle">
+          <h2>Who it’s for</h2>
+          <p>Built for serious amateurs and club racers.</p>
+        </div>
+
+        <div class="grid2">
+          <div class="panel">
+            <h3>Built for</h3>
+            <ul>
+              <li>Club racers and spec-class drivers</li>
+              <li>Track-day drivers who want to level up</li>
+              <li>Drivers without full-time engineers</li>
+              <li>Teams who want disciplined notes and repeatability</li>
+            </ul>
+          </div>
+          <div class="panel">
+            <h3>Not built for</h3>
+            <ul>
+              <li>Magic lap-time promises</li>
+              <li>Replacing human engineers</li>
+              <li>Raw dashboards without decision support</li>
+              <li>Changing everything after one lap</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section id="quotes">
+        <div class="sectionTitle">
+          <h2>Early beta feedback</h2>
+          <p>What matters: fewer bad changes and better learning.</p>
+        </div>
+
+        <div class="grid3">
+          <div class="quote">
+            <p>“I stopped changing three things at once — and my weekends got way better.”</p>
+            <small>Club racer (beta)</small>
+          </div>
+          <div class="quote">
+            <p>“This forced me to think before touching the car.”</p>
+            <small>Track-day driver (beta)</small>
+          </div>
+          <div class="quote">
+            <p>“I finally remember <em>why</em> I made changes last season.”</p>
+            <small>Spec-class racer (beta)</small>
+          </div>
+        </div>
+      </section>
+
+      <section id="beta">
+        <div class="sectionTitle">
+          <h2>Join Early Access</h2>
+          <p>Limited beta for racers who will actually use it and give feedback.</p>
+        </div>
+
+        <div class="panel">
+          <h3>Get the first build + help shape the product</h3>
+          <p>
+            If you race and you’re tired of guessing, join the early access list. You’ll get the first
+            release and a direct line to the roadmap.
+          </p>
+
+          <form onsubmit="return handleSubmit(event)">
+            <label class="sr-only" for="email" style="position:absolute;left:-9999px;">Email</label>
+            <input id="email" name="email" type="email" placeholder="you@example.com" required />
+            <button class="btn primary" type="submit">
+              <span class="dot" aria-hidden="true"></span>Request Access
+            </button>
+          </form>
+
+          <div class="fineprint">
+            No spam. Just product updates and beta invites. Unsubscribe anytime.
+          </div>
+
+          <div id="formStatus" class="fineprint" style="margin-top:10px;"></div>
+        </div>
+      </section>
+
+      <footer>
+        <div>
+          <b style="color:var(--text);">Apex Racecraft</b>
+          <span style="margin-left:10px;">Engineering-guided setup decisions for club racers.</span>
+        </div>
+        <div class="footerLinks">
+          <a href="#top">Back to top</a>
+          <a href="#how">How it works</a>
+          <a href="#beta">Early access</a>
+        </div>
+      </footer>
+    </main>
+  </div>
+
+  <script>
+    // Front-end only "mock" submission.
+    // Replace with your real endpoint later (e.g., POST to your API or form provider).
+    function handleSubmit(event) {
+      event.preventDefault();
+      const status = document.getElementById('formStatus');
+      const email = document.getElementById('email').value.trim();
+
+      if (!email) return false;
+
+      status.textContent = "Thanks — you're on the list. We'll reach out when the beta opens.";
+      status.style.color = "rgba(126,231,135,0.95)";
+      event.target.reset();
+      return false;
+    }
+  </script>
+</body>
+</html>
