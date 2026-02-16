@@ -18,7 +18,7 @@ Drop this file in your repo as /docs/index.html (or /index.html) and enable GitH
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="description" content="Apex Racecraft brings pro-level telemetry insights to grassroots racers: capture on mobile, session debriefs, lap comparisons, setup tracking, and actionable coaching." />
   <title>Apex Racecraft — Telemetry, Setup, & Debrief for Grassroots Racers</title>
-`
+
   <!-- Open Graph -->
   <meta property="og:title" content="Apex Racecraft — Telemetry, Setup, & Debrief for Grassroots Racers" />
   <meta property="og:description" content="Capture on mobile. Pro-level insights for grassroots racers: session debriefs, lap overlays, setup suggestions, and actionable coaching." />
@@ -76,11 +76,10 @@ Drop this file in your repo as /docs/index.html (or /index.html) and enable GitH
     .nav-inner{ display:flex; align-items:center; justify-content:space-between; padding:14px 0; }
     .brand{ display:flex; align-items:center; gap:12px; }
     .logo{
-      width:34px; height:34px; border-radius:10px;
-      background: radial-gradient(circle at 25% 20%, rgba(255,255,255,.35), transparent 45%),
-                  linear-gradient(135deg, rgba(124,92,255,.95), rgba(34,211,238,.75));
-      box-shadow: 0 10px 30px rgba(124,92,255,.18);
-      border:1px solid rgba(255,255,255,.18);
+      width:90px; height:90px; border-radius:20px;
+      background: none;
+      box-shadow: none;
+      border:none;
     }
     .brand-name{ font-weight:800; letter-spacing:.2px; }
     .nav-links{ display:flex; gap:16px; align-items:center; color:var(--muted); font-size:14px; }
@@ -96,7 +95,7 @@ Drop this file in your repo as /docs/index.html (or /index.html) and enable GitH
     .drawer a{ display:block; padding:12px 4px; color:var(--muted); border-bottom:1px solid rgba(255,255,255,.05); }
     .drawer a:hover{ color:var(--text); }
 
-    .hero{ padding:56px 0 24px; }
+    .hero{ padding:20px 0 24px; }
     .hero-grid{ display:grid; grid-template-columns: 1.05fr .95fr; gap:26px; align-items:center; }
     h1{ font-size: clamp(34px, 4.5vw, 54px); line-height:1.05; margin:14px 0 14px; letter-spacing:-.6px; }
     .subhead{ font-size:17px; max-width:56ch; margin:0; color:var(--muted); }
@@ -240,7 +239,16 @@ Drop this file in your repo as /docs/index.html (or /index.html) and enable GitH
       .grid-2{ grid-template-columns:1fr; }
       .pricing{ grid-template-columns:1fr; }
       .nav-links{ display:none; }
-      .hamburger{ display:inline-flex; align-items:center; justify-content:center; }
+      .hamburger{ display:inline-flex; align-items:center; justify-content:center; width:48px; height:48px; font-size:22px; }
+      .nav-cta .btn.primary{ padding:8px 12px; font-size:13px; border-radius:10px; }
+      .nav-inner{ position:relative; flex-wrap:wrap; }
+      .brand{ width:100%; }
+      .nav-cta{ position:absolute; right:0; top:50%; transform:translateY(-50%); }
+      .subhead{ max-width:100%; }
+      .hero-actions{ flex-wrap:nowrap; }
+      .hero-actions .btn{ flex:1; padding:12px 10px; font-size:14px; white-space:nowrap; }
+      .mock{ aspect-ratio:4/5; }
+      .mock-overlay{ grid-template-columns:1fr; gap:8px; padding:10px; }
     }
 
     @media (prefers-reduced-motion: reduce){
@@ -283,12 +291,9 @@ Drop this file in your repo as /docs/index.html (or /index.html) and enable GitH
   <div class="nav" id="top">
     <div class="container">
       <div class="nav-inner">
-        <div class="brand">
-          <div class="logo" aria-hidden="true"></div>
-          <div>
-            <div class="brand-name">Apex Racecraft</div>
-            <div class="small" style="color:var(--muted2); margin-top:2px;">Professional Race Engineering for grassroots racers</div>
-          </div>
+        <div class="brand" style="flex-direction:column; align-items:flex-start; gap:0;">
+          <div class="logo" aria-hidden="true"><img src="images/logo.png" alt="Apex Racecraft" style="width:100%;height:100%;object-fit:contain;border-radius:inherit;"></div>
+          <div class="small" style="color:var(--muted2); margin-top:-18px; margin-left: 7px;">Professional Race Engineering for grassroots racers</div>
         </div>
 
         <nav class="nav-links" aria-label="Primary">
@@ -375,7 +380,7 @@ Drop this file in your repo as /docs/index.html (or /index.html) and enable GitH
                 </div>
                 <div class="mini">
                   <h4>Learning</h4>
-                  ~<p>What worked, where, and under what conditions.</p>
+                  <p>What worked, where, and under what conditions.</p>
                   <div class="bar"><span style="width:72%"></span></div>
                   <p style="color:var(--muted2)">+0.18s gained in T5–T7</p>
                 </div>
@@ -407,7 +412,7 @@ Drop this file in your repo as /docs/index.html (or /index.html) and enable GitH
             <svg viewBox="0 0 24 24" fill="none"><path d="M7 7h10v10H7V7Z" stroke="currentColor" stroke-width="1.6"/><path d="M9 5h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M10 19h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
           </div>
           <h3>Mobile telemetry capture</h3>
-          <p>Record sessions from your phone with an offline-first workflow. Sensors-ready for external GPS/OBD/IMU paths as you grow.</p>
+          <p>Record sessions from your phone with an offline-first workflow. Sensors-ready for external GPS/OBD/IMU paths as you grow. Import data from most major data aquisition systems including AIM and Motec</p>
         </div>
 
         <div class="card">
@@ -567,9 +572,7 @@ Drop this file in your repo as /docs/index.html (or /index.html) and enable GitH
             <li>Multi-driver support</li>
             <li>Session comparisons</li>
             <li>Shared setup library + baselines</li>
-            <li>Team debrief workflows<
-      /
-li>
+            <li>Team debrief workflows</li>
           </ul>
           <div style="margin-top:14px;">
             <a class="btn" href="#waitlist">Contact us</a>
@@ -670,11 +673,11 @@ li>
         </details>
         <details>
           <summary>Is there a mobile app?</summary>
-          <p>Yes — the plan is mobile-first capture (offline in the paddock) with analysis and debrief workflows that stay fast and simple.</p>
+          <p>Yes — the plan is mobile-first capture (Just click record) with analysis and debrief workflows that stay fast and simple.</p>
         </details>
         <details>
           <summary>Do I need a MoTeC / AIM system?</summary>
-          <p>No. Those are great, but Apex is designed to support multiple sources over time and keep the workflow consistent (capture, compare, debrief, learn).</p>
+          <p>No. Those are great, but Apex is designed to support multiple sources over time and keep the workflow consistent (capture, compare, debrief, learn). We support importing data from most major data aquisition systems. It's not required, but more data will only make the analysis and suggestions better.</p>
         </details>
         <details>
           <summary>How do setup suggestions work?</summary>
@@ -682,11 +685,11 @@ li>
         </details>
         <details>
           <summary>How do debriefs work?</summary>
-          <p>Debriefs summarize the biggest opportunities: braking points, apex speeds, exit throttle, and consistency — turning data into action items and a practice plan.</p>
+          <p>Debriefs summarize the biggest opportunities: braking points, apex speeds, throttle application, and consistency — turning data into action items and a practice plan.</p>
         </details>
         <details>
           <summary>Is my data private?</summary>
-          <p>That’s the goal: privacy-first by default, with explicit sharing/export when you choose. (Update this once your policy is ready.)</p>
+          <p>That’s the goal: privacy-first by default, with explicit sharing/export when you choose.</p>
         </details>
       </div>
     </div>
@@ -698,7 +701,7 @@ li>
       <div class="footer-grid">
         <div>
           <div style="display:flex; align-items:center; gap:10px; margin-bottom:8px;">
-            <div class="logo" aria-hidden="true" style="width:28px; height:28px; border-radius:10px;"></div>
+            <div class="logo" aria-hidden="true"><img src="images/logo2.png" alt="Apex Racecraft" style="width:100%;height:100%;object-fit:contain;border-radius:inherit;"></div>
             <div style="font-weight:800;">Apex Racecraft</div>
           </div>
           <div class="small">© <span id="year"></span> Apex Racecraft. All rights reserved.</div>
@@ -715,6 +718,10 @@ li>
   </footer>
 
   <script>
+    if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+    window.scrollTo(0, 0);
+  </script>
+  <script>
     // Mobile nav toggle
     const hamburger = document.getElementById('hamburger');
     const drawer = document.getElementById('drawer');
@@ -729,7 +736,7 @@ li>
       }));
     }
 
-    // Waitlist "demo" handler (stores locally so it works on GitHub Pages without a backend)
+
     function joinWaitlist(event){
       event.preventDefault();
       const email = document.getElementById('email').value.trim();
