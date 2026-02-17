@@ -51,6 +51,14 @@ Drop this file in your repo as /docs/index.html (or /index.html) and enable GitH
     }
 
     *{ box-sizing:border-box; }
+    input:-webkit-autofill,
+    input:-webkit-autofill:hover,
+    input:-webkit-autofill:focus{
+      -webkit-text-fill-color: var(--text);
+      -webkit-box-shadow: 0 0 0 1000px rgba(7,10,16,.55) inset !important;
+      transition: background-color 5000s ease-in-out 0s;
+      caret-color: var(--text);
+    }
     html{ scroll-behavior:smooth; scroll-padding-top:60px; }
     html,body{ margin:0; padding:0; background: radial-gradient(1200px 700px at 18% 6%, rgba(124,92,255,.18), transparent 55%),
                                          radial-gradient(900px 600px at 80% 14%, rgba(34,211,238,.10), transparent 50%),
@@ -639,7 +647,7 @@ Drop this file in your repo as /docs/index.html (or /index.html) and enable GitH
           Limited beta for racers who will actually use it and give feedback. Tell us what you drive and what telemetry you have (phone-only, AIM, MoTeC, iRacing, etc.).
         </p>
 
-        <form class="grid-2" onsubmit="return joinWaitlist(event)">
+        <form class="grid-2" action="https://formspree.io/f/xgolyzda" method="POST" onsubmit="return joinWaitlist(event)">
           <div>
             <label class="small" for="email" style="display:block; margin-bottom:6px; color:var(--muted2);">Email</label>
             <input id="email" name="email" type="email" required placeholder="jeff@apexracecraft.com"
@@ -737,26 +745,38 @@ Drop this file in your repo as /docs/index.html (or /index.html) and enable GitH
     }
 
 
-    function joinWaitlist(event){
+    async function joinWaitlist(event){
       event.preventDefault();
+      const form = event.target;
       const email = document.getElementById('email').value.trim();
-      const car = document.getElementById('car').value.trim();
       const status = document.getElementById('waitlistStatus');
+      const submitBtn = form.querySelector('button[type="submit"]');
 
       if (!email) return false;
 
-      const record = { email, car, ts: new Date().toISOString() };
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting...';
+      status.textContent = '';
+
       try {
-        const key = "apex_waitlist";
-        const existing = JSON.parse(localStorage.getItem(key) || "[]");
-        existing.push(record);
-        localStorage.setItem(key, JSON.stringify(existing));
-        status.textContent = "You're on the list — we’ll email you when beta opens.";
+        const response = await fetch('https://formspree.io/f/xgolyzda', {
+          method: 'POST',
+          body: new FormData(form),
+          headers: { 'Accept': 'application/json' }
+        });
+
+        if (response.ok) {
+          status.textContent = "You're on the list — we'll email you when beta opens.";
+          form.reset();
+        } else {
+          status.textContent = "Something went wrong. Please try again.";
+        }
       } catch (e) {
-        status.textContent = "Saved (local). Replace this form with Formspree/Mailchimp when ready.";
+        status.textContent = "Network error. Please try again.";
       }
 
-      event.target.reset();
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Join waitlist';
       return false;
     }
 
