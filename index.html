@@ -22,6 +22,9 @@ Drop this file in your repo as /docs/index.html (or /index.html) and enable GitH
   <meta name="robots" content="index, follow" />
   <title>Apex Racecraft — Pro-level insights for grassroots racers</title>
   <link rel="canonical" href="https://apexracecraft.com/" />
+  <link rel="preconnect" href="https://www.googletagmanager.com" />
+  <link rel="preconnect" href="https://cloud.umami.is" />
+  <meta name="author" content="Apex Racecraft" />
 
   <!-- Open Graph -->
   <meta property="og:site_name" content="Apex Racecraft" />
@@ -50,6 +53,9 @@ Drop this file in your repo as /docs/index.html (or /index.html) and enable GitH
         "@id": "https://apexracecraft.com/#organization",
         "name": "Apex Racecraft",
         "url": "https://apexracecraft.com/",
+        "sameAs": [
+          "https://twitter.com/apexracecraft"
+        ]
       },
       {
         "@type": "SoftwareApplication",
@@ -81,6 +87,20 @@ Drop this file in your repo as /docs/index.html (or /index.html) and enable GitH
             "billingIncrement": "P1M"
           }
         ],
+        "review": [
+          {
+            "@type": "Review",
+            "reviewBody": "I stopped changing three things at once, and my weekends got way better.",
+            "author": { "@type": "Person", "name": "Jeff R" },
+            "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+          },
+          {
+            "@type": "Review",
+            "reviewBody": "This forced me to think before touching the car, and stop guessing.",
+            "author": { "@type": "Person", "name": "Jeff R" },
+            "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+          }
+        ],
         "publisher": {
           "@id": "https://apexracecraft.com/#organization"
         }
@@ -93,12 +113,67 @@ Drop this file in your repo as /docs/index.html (or /index.html) and enable GitH
         "publisher": {
           "@id": "https://apexracecraft.com/#organization"
         }
+      },
+      {
+        "@type": "FAQPage",
+        "@id": "https://apexracecraft.com/#faq",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "Is this for sim or real track use?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Both. The workflow is built around sessions, lap comparisons, setup learning, and debriefs. Regardless of where the data comes from."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is there a mobile app?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Yes, the plan is mobile-first capture (just click record) with analysis and debrief workflows that stay fast and simple."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Do I need a MoTeC / AIM system?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Apex is designed to support multiple sources and keeps the workflow consistent: capture, compare, debrief, learn. We support importing data from most major data acquisition systems."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do setup suggestions work?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "They connect symptoms (understeer/oversteer phases, entry/exit issues) to patterns in the data and your notes, then track what you changed and what improved."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How do debriefs work?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Debriefs summarize the biggest opportunities: braking points, apex speeds, throttle application, and consistency, turning data into action items and a practice plan."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Is my data private?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Privacy-first by default, with explicit sharing and export only when you choose."
+            }
+          }
+        ]
       }
     ]
   }
   </script>
 
   <link rel="icon" href="assets/favicon.png" />
+  <link rel="apple-touch-icon" href="images/logotransparent.png" />
 
   <style>
     :root{
@@ -718,7 +793,7 @@ Drop this file in your repo as /docs/index.html (or /index.html) and enable GitH
       <div style="margin:40px 0;">
         <img
           src="images/bmw.jpg"
-          alt="Amateur racers"
+          alt="Amateur racer at a track day event in a BMW"
           style="
             width:100%;
             max-height:460px;
