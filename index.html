@@ -77,14 +77,20 @@ Drop this file in your repo as /docs/index.html (or /index.html) and enable GitH
             "name": "Driver",
             "price": "15",
             "priceCurrency": "USD",
-            "billingIncrement": "P1M"
+            "priceSpecification": {
+              "@type": "UnitPriceSpecification",
+              "unitCode": "MON"
+            }
           },
           {
             "@type": "Offer",
             "name": "Paddock",
             "price": "49",
             "priceCurrency": "USD",
-            "billingIncrement": "P1M"
+            "priceSpecification": {
+              "@type": "UnitPriceSpecification",
+              "unitCode": "MON"
+            }
           }
         ],
         "review": [
