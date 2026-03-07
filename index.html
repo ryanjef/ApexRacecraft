@@ -17,31 +17,43 @@ Drop this file in your repo as /docs/index.html (or /index.html) and enable GitH
   </script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <meta name="description" content="Apex Racecraft brings pro-level telemetry insights to grassroots racers: capture on mobile, session debriefs, lap comparisons, setup tracking, and actionable coaching." />
-  <meta name="keywords" content="racecraft, race engineering, race car setup, spece46, racing telemetry, grassroots racing, motorsport data, lap comparison, race setup, track day app, race engineering, mobile telemetry, formula v, corvette" />
+  <meta name="description" content="Apex Racecraft: race telemetry &amp; setup tracking for grassroots drivers. Capture on mobile, compare laps, debrief with action items, and build faster setups." />
+  <meta name="keywords" content="racecraft, race engineering, race car setup, spece46, racing telemetry, grassroots racing, motorsport data, lap comparison, race setup, track day app, mobile telemetry, formula v, corvette, track day telemetry, hpde, high performance driving event, lap timer app, motorsport analytics, race data analysis, amateur motorsport, iRacing telemetry, AIM data, MoTeC alternative, race engineering app, race coaching app, racing data logger" />
   <meta name="robots" content="index, follow" />
-  <title>Apex Racecraft — Pro-level insights for grassroots racers</title>
+  <title>Apex Racecraft — Race Telemetry &amp; Setup for Grassroots Racers</title>
   <link rel="canonical" href="https://apexracecraft.com/" />
   <link rel="preconnect" href="https://www.googletagmanager.com" />
   <link rel="preconnect" href="https://cloud.umami.is" />
+  <link rel="dns-prefetch" href="https://www.googletagmanager.com" />
+  <link rel="dns-prefetch" href="https://cloud.umami.is" />
+  <link rel="dns-prefetch" href="https://formspree.io" />
+  <link rel="preload" as="image" href="images/setupscreenshot.png" />
+  <link rel="manifest" href="/manifest.json" />
   <meta name="author" content="Apex Racecraft" />
 
   <!-- Open Graph -->
+  <meta property="og:locale" content="en_US" />
   <meta property="og:site_name" content="Apex Racecraft" />
-  <meta property="og:title" content="Apex Racecraft — Telemetry, Setup, & Debrief for Grassroots Racers" />
-  <meta property="og:description" content="Capture on mobile. Pro-level insights for grassroots racers: session debriefs, lap overlays, setup suggestions, and actionable coaching." />
+  <meta property="og:title" content="Apex Racecraft — Race Telemetry, Setup, & Debrief for Grassroots Racers" />
+  <meta property="og:description" content="Capture on mobile. Race telemetry for grassroots drivers: session debriefs, lap overlays, setup suggestions, and actionable coaching." />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://apexracecraft.com/" />
   <meta property="og:image" content="https://apexracecraft.com/images/logo.png" />
+  <meta property="og:image:secure_url" content="https://apexracecraft.com/images/logo.png" />
+  <meta property="og:image:type" content="image/png" />
   <meta property="og:image:width" content="512" />
   <meta property="og:image:height" content="512" />
+  <meta property="og:image:alt" content="Apex Racecraft — Race telemetry and setup app for grassroots racers" />
   <meta name="theme-color" content="#0b0f17" />
 
   <!-- Twitter Card -->
   <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content="Apex Racecraft — Telemetry, Setup, & Debrief for Grassroots Racers" />
-  <meta name="twitter:description" content="Capture on mobile. Pro-level insights for grassroots racers: session debriefs, lap overlays, setup suggestions, and actionable coaching." />
+  <meta name="twitter:site" content="@apexracecraft" />
+  <meta name="twitter:creator" content="@apexracecraft" />
+  <meta name="twitter:title" content="Apex Racecraft — Race Telemetry, Setup, & Debrief for Grassroots Racers" />
+  <meta name="twitter:description" content="Capture on mobile. Race telemetry for grassroots drivers: session debriefs, lap overlays, setup suggestions, and actionable coaching." />
   <meta name="twitter:image" content="https://apexracecraft.com/images/logo.png" />
+  <meta name="twitter:image:alt" content="Apex Racecraft — Race telemetry and setup app for grassroots racers" />
 
   <!-- Structured Data -->
   <script type="application/ld+json">
@@ -53,9 +65,25 @@ Drop this file in your repo as /docs/index.html (or /index.html) and enable GitH
         "@id": "https://apexracecraft.com/#organization",
         "name": "Apex Racecraft",
         "url": "https://apexracecraft.com/",
+        "logo": {
+          "@type": "ImageObject",
+          "url": "https://apexracecraft.com/images/logo.png",
+          "width": 512,
+          "height": 512
+        },
         "sameAs": [
           "https://twitter.com/apexracecraft"
         ]
+      },
+      {
+        "@type": "WebPage",
+        "@id": "https://apexracecraft.com/#webpage",
+        "url": "https://apexracecraft.com/",
+        "name": "Apex Racecraft — Race Telemetry & Setup for Grassroots Racers",
+        "description": "Apex Racecraft: race telemetry & setup tracking for grassroots drivers. Capture on mobile, compare laps, debrief with action items, and build faster setups.",
+        "isPartOf": { "@id": "https://apexracecraft.com/#website" },
+        "about": { "@id": "https://apexracecraft.com/#app" },
+        "publisher": { "@id": "https://apexracecraft.com/#organization" }
       },
       {
         "@type": "SoftwareApplication",
@@ -103,7 +131,13 @@ Drop this file in your repo as /docs/index.html (or /index.html) and enable GitH
           {
             "@type": "Review",
             "reviewBody": "This forced me to think before touching the car, and stop guessing.",
-            "author": { "@type": "Person", "name": "Jeff R" },
+            "author": { "@type": "Person", "name": "Beta Racer" },
+            "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
+          },
+          {
+            "@type": "Review",
+            "reviewBody": "I finally remember why I made changes last season.",
+            "author": { "@type": "Person", "name": "Early Adopter" },
             "reviewRating": { "@type": "Rating", "ratingValue": "5", "bestRating": "5" }
           }
         ],
@@ -111,7 +145,7 @@ Drop this file in your repo as /docs/index.html (or /index.html) and enable GitH
           "@type": "AggregateRating",
           "ratingValue": "5",
           "bestRating": "5",
-          "ratingCount": "2"
+          "ratingCount": "3"
         },
         "publisher": {
           "@id": "https://apexracecraft.com/#organization"
@@ -510,6 +544,7 @@ Drop this file in your repo as /docs/index.html (or /index.html) and enable GitH
   </div>
 
   <!-- HERO -->
+  <main id="main-content">
   <header class="hero">
     <div class="container">
       <div class="hero-grid">
@@ -577,9 +612,9 @@ Drop this file in your repo as /docs/index.html (or /index.html) and enable GitH
             <p></p>
             <div class="carousel" id="heroCarousel">
               <div class="carousel-track">
-                <img src="images/setupscreenshot.png" alt="Setup analysis and telemetry insights" class="active" />
-                <img src="images/lapcompare.png" alt="Lap comparison view" />
-                <img src="images/raceoverlay.png" alt="Race overlay analysis" />
+                <img src="images/setupscreenshot.png" alt="Setup analysis and telemetry insights" class="active" fetchpriority="high" />
+                <img src="images/lapcompare.png" alt="Lap comparison view" loading="lazy" />
+                <img src="images/raceoverlay.png" alt="Race overlay analysis" loading="lazy" />
               </div>
               <div class="carousel-dots"></div>
             </div>
@@ -605,7 +640,7 @@ Drop this file in your repo as /docs/index.html (or /index.html) and enable GitH
             <svg viewBox="0 0 24 24" fill="none"><path d="M7 7h10v10H7V7Z" stroke="currentColor" stroke-width="1.6"/><path d="M9 5h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><path d="M10 19h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>
           </div>
           <h3>Mobile telemetry capture</h3>
-          <p>Record sessions from your phone with an offline-first workflow. Sensors-ready for external GPS/OBD/IMU paths as you grow. Import data from most major data aquisition systems including AIM and Motec</p>
+          <p>Record sessions from your phone with an offline-first workflow. Sensors-ready for external GPS/OBD/IMU paths as you grow. Import data from most major data acquisition systems including AIM and Motec</p>
         </div>
 
         <div class="card">
@@ -801,7 +836,7 @@ Drop this file in your repo as /docs/index.html (or /index.html) and enable GitH
   </section>
 
   <!-- BETA -->
-  <section id="beta">
+  <section id="beta" aria-label="Beta program — real racers, real track use">
     <div class="container">
       <div style="margin:40px 0;">
         <img
@@ -870,7 +905,7 @@ Drop this file in your repo as /docs/index.html (or /index.html) and enable GitH
         </details>
         <details>
           <summary>Do I need a MoTeC / AIM system?</summary>
-          <p>No. Those are great, but Apex is designed to support multiple sources over time and keep the workflow consistent (capture, compare, debrief, learn). We support importing data from most major data aquisition systems. It's not required, but more data will only make the analysis and suggestions better.</p>
+          <p>No. Those are great, but Apex is designed to support multiple sources over time and keep the workflow consistent (capture, compare, debrief, learn). We support importing data from most major data acquisition systems. It's not required, but more data will only make the analysis and suggestions better.</p>
         </details>
         <details>
           <summary>How do setup suggestions work?</summary>
@@ -887,6 +922,8 @@ Drop this file in your repo as /docs/index.html (or /index.html) and enable GitH
       </div>
     </div>
   </section>
+
+  </main>
 
   <!-- FOOTER -->
   <footer>

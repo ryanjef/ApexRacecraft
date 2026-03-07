@@ -1,0 +1,51 @@
+{
+  "name": "Apex Racecraft",
+  "short_name": "Apex Racecraft",
+  "description": "Race telemetry and setup tracking for grassroots drivers. Capture sessions on mobile, compare laps, debrief with action items, and build faster setups.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#070a10",
+  "theme_color": "#0b0f17",
+  "lang": "en",
+  "icons": [
+    {
+      "src": "/images/favicon-16.png",
+      "sizes": "16x16",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/favicon-32.png",
+      "sizes": "32x32",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/apple-touch-icon.png",
+      "sizes": "180x180",
+      "type": "image/png"
+    },
+    {
+      "src": "/images/logo.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ],
+  "categories": ["sports", "productivity"],
+  "screenshots": [
+    {
+      "src": "/images/setupscreenshot.png",
+      "type": "image/png",
+      "label": "Setup analysis and telemetry insights"
+    },
+    {
+      "src": "/images/lapcompare.png",
+      "type": "image/png",
+      "label": "Lap comparison view"
+    },
+    {
+      "src": "/images/raceoverlay.png",
+      "type": "image/png",
+      "label": "Race overlay analysis"
+    }
+  ]
+}
